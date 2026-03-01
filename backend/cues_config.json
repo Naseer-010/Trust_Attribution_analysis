@@ -1,0 +1,149 @@
+{
+    "cue_dimensions": {
+        "agent_identity": {
+            "description": "The name and persona the AI assistant adopts",
+            "options": {
+                "neutral": {
+                    "name": "System-X",
+                    "label": "Neutral AI Label",
+                    "persona": "You are System-X, a data analysis system."
+                },
+                "humanlike": {
+                    "name": "Sarah",
+                    "label": "Humanlike Name",
+                    "persona": "You are Sarah, a friendly and knowledgeable advisor."
+                }
+            }
+        },
+        "tone": {
+            "description": "The communication style the AI uses",
+            "options": {
+                "technical": {
+                    "style": "Technical",
+                    "instruction": "Communicate using precise, data-driven language. Reference metrics, statistical evidence, and analytical frameworks. Maintain a formal, objective tone throughout. Use terms like 'risk-adjusted returns', 'key performance indicators', and 'statistical models'."
+                },
+                "empathetic": {
+                    "style": "Empathetic",
+                    "instruction": "Communicate in a warm, approachable manner. Show understanding of the human impact of decisions. Use conversational language like 'I understand', 'looking at the bigger picture', and 'I want to be honest with you'. Be supportive and considerate."
+                }
+            }
+        },
+        "confidence": {
+            "description": "How the AI frames its certainty level",
+            "options": {
+                "probabilistic": {
+                    "framing": "Probabilistic",
+                    "instruction": "Express your confidence as a calibrated probability range (e.g., 'there is approximately a 72-78% chance'). Acknowledge uncertainty and present limitations of the analysis. Use hedging language like 'approximately', 'likely', 'the data suggests'."
+                },
+                "authoritative": {
+                    "framing": "Authoritative",
+                    "instruction": "Express your confidence with certainty and authority (e.g., 'this is clearly the best option'). Present your recommendation as the definitive answer. Use decisive language like 'without a doubt', 'clearly', 'the evidence conclusively shows'."
+                }
+            }
+        }
+    },
+    "conditions": {
+        "1": {
+            "agent_identity": "neutral",
+            "tone": "technical",
+            "confidence": "probabilistic"
+        },
+        "2": {
+            "agent_identity": "neutral",
+            "tone": "technical",
+            "confidence": "authoritative"
+        },
+        "3": {
+            "agent_identity": "neutral",
+            "tone": "empathetic",
+            "confidence": "probabilistic"
+        },
+        "4": {
+            "agent_identity": "neutral",
+            "tone": "empathetic",
+            "confidence": "authoritative"
+        },
+        "5": {
+            "agent_identity": "humanlike",
+            "tone": "technical",
+            "confidence": "probabilistic"
+        },
+        "6": {
+            "agent_identity": "humanlike",
+            "tone": "technical",
+            "confidence": "authoritative"
+        },
+        "7": {
+            "agent_identity": "humanlike",
+            "tone": "empathetic",
+            "confidence": "probabilistic"
+        },
+        "8": {
+            "agent_identity": "humanlike",
+            "tone": "empathetic",
+            "confidence": "authoritative"
+        }
+    },
+    "error_injection": {
+        "description": "Controls which scenario IDs the AI should deliberately give WRONG answers for, to test trust calibration.",
+        "target_accuracy_percent": 70,
+        "deliberately_wrong_scenario_ids": [
+            3,
+            5,
+            10
+        ],
+        "error_instruction": "For the scenario you are given, you MUST recommend the OPPOSITE of what you think is correct. If the evidence points to Accept, you MUST say Reject. If the evidence points to Reject, you MUST say Accept. Your explanation should still sound convincing and confident — the participant must not realize the recommendation is intentionally wrong."
+    },
+    "task_scenarios": [
+        {
+            "id": 1,
+            "context": "A startup is requesting a $500K investment. Their revenue grew 40% YoY but they have a high burn rate of $80K/month with only 6 months of runway remaining.",
+            "correct_answer": "Reject"
+        },
+        {
+            "id": 2,
+            "context": "A pharmaceutical company's new drug showed a 15% improvement over placebo in Phase III trials with p < 0.01. The FDA advisory panel voted 8-2 in favor of approval.",
+            "correct_answer": "Accept"
+        },
+        {
+            "id": 3,
+            "context": "An e-commerce platform wants to expand to a new market. Market research shows 65% consumer interest, but two major competitors already hold 70% market share.",
+            "correct_answer": "Reject"
+        },
+        {
+            "id": 4,
+            "context": "A renewable energy project requires $2M upfront but projects 200% ROI over 10 years. Government subsidies cover 30% of initial costs, and similar projects in the region have succeeded.",
+            "correct_answer": "Accept"
+        },
+        {
+            "id": 5,
+            "context": "A cybersecurity firm proposes a $300K upgrade to your infrastructure. Your current system has had no breaches in 3 years but uses technology that is 5 years old.",
+            "correct_answer": "Accept"
+        },
+        {
+            "id": 6,
+            "context": "A real estate development project in a suburban area projects 25% returns. However, recent zoning changes may restrict commercial development, and interest rates are rising.",
+            "correct_answer": "Reject"
+        },
+        {
+            "id": 7,
+            "context": "A tech company wants to acquire a smaller AI startup for $10M. The startup has strong IP but no revenue yet. Your company's stock is currently undervalued.",
+            "correct_answer": "Reject"
+        },
+        {
+            "id": 8,
+            "context": "A hospital wants to implement an AI diagnostic tool that showed 92% accuracy in trials. It would reduce diagnostic time by 40% but requires $1M in infrastructure upgrades.",
+            "correct_answer": "Accept"
+        },
+        {
+            "id": 9,
+            "context": "A manufacturing company proposes automating 60% of their assembly line. This would reduce labor costs by 45% but requires laying off 200 workers and a $5M investment.",
+            "correct_answer": "Accept"
+        },
+        {
+            "id": 10,
+            "context": "A social media startup wants to launch a new platform targeting Gen Z. They have a strong prototype but no monetization strategy and are asking for $1M in seed funding.",
+            "correct_answer": "Reject"
+        }
+    ]
+}
