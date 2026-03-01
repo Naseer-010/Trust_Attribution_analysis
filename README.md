@@ -219,4 +219,4 @@ This project is built for the **"Humanlike AI Systems and Trust Attribution"** p
 
 ## License
 
-Open-source research prototype. MIT License.
+Open-source research prototype.
